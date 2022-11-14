@@ -1,107 +1,81 @@
 #!/bin/bash
-MYIP=$(wget -qO- ipinfo.io/ip);
-echo "Checking VPS"
+dateFromServer=$(curl -v --insecure --silent https://google.com/ 2>&1 | grep Date | sed -e 's/< Date: //')
+biji=`date +"%Y-%m-%d" -d "$dateFromServer"`
+#########################
 
-clear 
-if [ ! -e /usr/local/bin/reboot_otomatis ]; then
-echo '#!/bin/bash' > /usr/local/bin/reboot_otomatis 
-echo 'tanggal=$(date +"%m-%d-%Y")' >> /usr/local/bin/reboot_otomatis 
-echo 'waktu=$(date +"%T")' >> /usr/local/bin/reboot_otomatis 
-echo 'echo "Server successfully rebooted on the date of $tanggal hit $waktu." >> /root/log-reboot.txt' >> /usr/local/bin/reboot_otomatis 
-echo '/sbin/shutdown -r now' >> /usr/local/bin/reboot_otomatis 
-chmod +x /usr/local/bin/reboot_otomatis
-fi
+red='\e[1;31m'
+green='\e[0;32m'
+NC='\e[0m'
+green() { echo -e "\\033[32;1m${*}\\033[0m"; }
+red() { echo -e "\\033[31;1m${*}\\033[0m"; }
 clear
-echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "\E[40;1;37m       • AUTO-REBOOT MENU •        \e[0m"
-echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e ""
-echo -e "[\e[36m•1\e[0m] Set Auto-Reboot Setiap 1 Jam"
-echo -e "[\e[36m•2\e[0m] Set Auto-Reboot Setiap 6 Jam"
-echo -e "[\e[36m•3\e[0m] Set Auto-Reboot Setiap 12 Jam"
-echo -e "[\e[36m•4\e[0m] Set Auto-Reboot Setiap 1 Hari"
-echo -e "[\e[36m•5\e[0m] Set Auto-Reboot Setiap 1 Minggu"
-echo -e "[\e[36m•6\e[0m] Set Auto-Reboot Setiap 1 Bulan"
-echo -e "[\e[36m•7\e[0m] Matikan Auto-Reboot"
-echo -e "[\e[36m•8\e[0m] View reboot log"
-echo -e "[\e[36m•9\e[0m] Remove reboot log"
-echo -e ""
-echo -e " [\e[31m•0\e[0m] \e[31mBACK TO MENU\033[0m"
-echo -e ""
-echo -e "Press x or [ Ctrl+C ] • To-Exit"
-echo -e ""
-echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e ""
-read -p " Select menu : " x
-if test $x -eq 1; then
-echo "10 * * * * root /usr/local/bin/reboot_otomatis" > /etc/cron.d/reboot_otomatis
-echo "Auto-Reboot has been set every an hour."
-elif test $x -eq 2; then
-echo "10 */6 * * * root /usr/local/bin/reboot_otomatis" > /etc/cron.d/reboot_otomatis
-echo "Auto-Reboot has been successfully set every 6 hours."
-elif test $x -eq 3; then
-echo "10 */12 * * * root /usr/local/bin/reboot_otomatis" > /etc/cron.d/reboot_otomatis
-echo "Auto-Reboot has been successfully set every 12 hours."
-elif test $x -eq 4; then
-echo "10 0 * * * root /usr/local/bin/reboot_otomatis" > /etc/cron.d/reboot_otomatis
-echo "Auto-Reboot has been successfully set once a day."
-elif test $x -eq 5; then
-echo "10 0 */7 * * root /usr/local/bin/reboot_otomatis" > /etc/cron.d/reboot_otomatis
-echo "Auto-Reboot has been successfully set once a week."
-elif test $x -eq 6; then
-echo "10 0 1 * * root /usr/local/bin/reboot_otomatis" > /etc/cron.d/reboot_otomatis
-echo "Auto-Reboot has been successfully set once a month."
-elif test $x -eq 7; then
-rm -f /etc/cron.d/reboot_otomatis
-echo "Auto-Reboot successfully TURNED OFF."
-elif test $x -eq 8; then
-if [ ! -e /root/log-reboot.txt ]; then
-	clear
-    echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-    echo -e "\E[40;1;37m        • AUTO-REBOOT LOG •        \e[0m"
-    echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-    echo -e ""
-    echo "No reboot activity found"
-    echo -e ""
-    echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-    echo ""
-    read -n 1 -s -r -p "Press any key to back on menu"
-    auto-reboot
-	else
-	clear
-    echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-    echo -e "\E[40;1;37m        • AUTO-REBOOT LOG •        \e[0m"
-    echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-    echo -e ""    
-	echo 'LOG REBOOT'
-	cat /root/log-reboot.txt
-    echo -e ""
-    echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-    echo ""
-    read -n 1 -s -r -p "Press any key to back on menu"
-    auto-reboot    
-fi
-elif test $x -eq 9; then
-clear
-echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "\E[40;1;37m        • AUTO-REBOOT LOG •        \e[0m"
-echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e ""  
-echo "" > /root/log-reboot.txt
-echo "Auto Reboot Log successfully deleted!"
-echo -e ""
-echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo ""
-read -n 1 -s -r -p "Press any key to back on menu"
-auto-reboot 
-elif test $x -eq 0; then
-clear
-menu-set
+aureb=$(cat /home/re_otm)
+b=11
+if [ $aureb -gt $b ]
+then
+gg="PM"
 else
-clear
+gg="AM"
+fi
+
+echo -e "\e[36m┌─────────────────────────────────────────────────┐${NC}"
+echo -e "                  ⇱ AUTOREBOOT ⇲              \E[0m"
+echo -e "\e[36m└─────────────────────────────────────────────────┘${NC}"
+echo -e "
+    ${green}Example :${NC}
+    0     = 12 PM
+    12    = 12 AM
+    13-23 = 1 AM - 11 PM
+    1-11  = 1 PM - 11 AM
+"
+echo -e "\e[36m┌─────────────────────────────────────────────────┐${NC}"
 echo ""
-echo "Options Not Found In Menu"
+echo -e "     ${green}Current : $aureb $gg ${NC}"
+echo -e ""
+echo -e " \e[36m└───────────────────────────────────────────────┘${NC}" 
+
+while :; do
+  read -p "Input time auto reboot only 0 - 23 : " tr2
+  [[ $tr2 =~ ^[0-9]+$ ]] || { echo -ne; continue; }
+  if ((tr2 >= 0 && tr2 <= 23)); then
+    echo -ne
+    break
+  else
+    echo "Can't be more than 23"
+  fi
+done
+
+if [ -z $tr2 ]; then
+echo "..."
+exit 0
+fi
+
+if [ $tr2 -le 11 ]
+then
+beha=$(cat /home/re_otm)
+echo "$tr2" > /home/re_otm
+cat > /etc/cron.d/re_otm <<-END
+SHELL=/bin/sh
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+0 $tr2 * * * root /sbin/reboot
+END
+sed -i "/Autoreboot/c\   - Autoreboot On           : $tr2:00 AM [GMT+7]" /root/log-install.txt
+echo -e "${green}Successfully changed the auto reboot vps to : $tr2 AM ${NC}"
+service cron restart >/dev/null 2>&1
+service cron reload >/dev/null 2>&1
+else
+beha=$(cat /home/re_otm)
+echo "$tr2" > /home/re_otm
+cat > /etc/cron.d/re_otm <<-END
+SHELL=/bin/sh
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+0 $tr2 * * * root /sbin/reboot
+END
+sed -i "/Autoreboot/c\   - Autoreboot On           : $tr2:00 PM  [GMT+7]" /root/log-install.txt
+echo -e "${green}Successfully changed the auto reboot vps to- : $tr2 PM ${NC}"
+service cron restart >/dev/null 2>&1
+service cron reload >/dev/null 2>&1
+fi
 echo ""
 read -n 1 -s -r -p "Press any key to back on menu"
-auto-reboot 
-fi
+menu
