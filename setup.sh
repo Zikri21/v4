@@ -196,7 +196,7 @@ gg="AM"
 fi
 curl -sS ifconfig.me > /etc/myipvps
 echo " "
-echo "=====================-[ SCRIPT Reyhan21 ]-===================="
+echo "=====================-[ SCRIPT FRIENDS VPN ]-===================="
 echo ""
 echo "------------------------------------------------------------"
 echo ""
@@ -236,7 +236,7 @@ echo ""
 echo ""
 echo "------------------------------------------------------------"
 echo ""
-echo "===============-[ Script Created By Reyhan21 ]-==============="
+echo "===============-[ Script Created By FriendsVPN ]-==============="
 echo -e ""
 echo ""
 echo "" | tee -a log-install.txt
