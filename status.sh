@@ -132,7 +132,7 @@ clear;clear;clear
 
 echo -e "${YELLOW}----------------------------------------------------------${NC}"
 echo -e "                ${YELLOW}(${NC}${GREEN} STATUS SERVICE INFORMATION ${NC}${YELLOW})${NC}"
-echo -e "         OWNER : ${GREEN}ARTA MAULANA ${NC}${YELLOW}(${NC} ${GREEN}REYHAN21 ${NC}${YELLOW})${NC}"
+echo -e "         OWNER : ${GREEN} FriendsVPN ${NC}${YELLOW}(${NC} ${GREEN}REYHAN21 ${NC}${YELLOW})${NC}"
 echo -e "       © Copyright By REYHAN21 ${YELLOW}(${NC} 2022-2023 ${YELLOW})${NC}"
 echo -e "${YELLOW}----------------------------------------------------------${NC}"
 echo ""
