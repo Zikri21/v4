@@ -278,7 +278,7 @@ echo -e "${CYAN}╒━━━━━━━━━━━━━━━━━━━━�
 echo -e " \E[44;1;39m                 • SCRIPT MENU •                \E[0m"
 echo -e "${CYAN}╘━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╛\033[0m${NC}"
 echo -e " [\e[36m•1\e[0m] SSH & OpenVPN Menu [\e[36m•5\e[0m]\033[1;31m CEK AREK AKTIF SSH$NC"
-echo -e " [\e[36m•2\e[0m] Vmess Menu         [\e[36m•6\e[0m]\033[1;31m CEK AREK AKTIF XRAY$NC"
+echo -e " [\e[36m•2\e[0m] Vmess Menu         [\e[36m•6\e[0m]\033[1;31m BACKUP & RESTORE$NC"
 echo -e " [\e[36m•3\e[0m] Vless Menu         [\e[36m•7\e[0m] Clear RAM Cache"
 echo -e " [\e[36m•4\e[0m] Trojan Go Menu     [\e[36m•8\e[0m] Trojan WSS Menu"                  
 echo -e  "\e[36m╒════════════════════════════════════════════════╕\033[0m"
@@ -305,7 +305,7 @@ case $opt in
 3) clear ; menu-vless ;;
 4) clear ; menu-trgo ;;
 5) clear ; cek ;;
-6) clear ; cek-ws ;;
+6) clear ; menu-backup ;;
 7) clear ; clearcache ;;
 8) clear ; menu-trojan ;;
 9) clear ; menu-set ;;
