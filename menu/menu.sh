@@ -1,4 +1,19 @@
-#!/bin/bash
+#!/bin/bash 
+ # ========================================= 
+ vlx=$(grep -c -E "^#& " "/etc/xray/config.json") 
+ let vla=$vlx/2 
+ vmc=$(grep -c -E "^### " "/etc/xray/config.json") 
+ let vma=$vmc/2 
+ ssh1="$(awk -F: '$3 >= 1000 && $1 != "nobody" {print $1}' /etc/passwd | wc -l)" 
+  
+ trx=$(grep -c -E "^#! " "/etc/xray/config.json") 
+ let tra=$trx/2 
+ ssx=$(grep -c -E "^## " "/etc/xray/config.json") 
+ let ssa=$ssx/2 
+ COLOR1='\033[0;35m' 
+ COLOR2='\033[0;39m' 
+ clear
+ 
 BURIQ () {
     curl -sS https://raw.githubusercontent.com/Zikri21/permission/main/ipmini > /root/tmp
     data=( `cat /root/tmp | grep -E "^### " | awk '{print $2}'` )
@@ -273,6 +288,14 @@ echo -e "\e[33m System Uptime        \e[0m: \033[1;32m $uptime ${NC}"
 echo -e "\e[33m Isp Name             \e[0m: \033[1;32m $ISP ${NC}"
 echo -e "\e[33m Domain               \e[0m: \033[1;36m $domain ${NC}"	
 echo -e "\e[33m Ip Vps               \e[0m: \033[1;36m $IPVPS ${NC}"	
+
+echo -e "${GREEN}INGATLAH KAWAN DILANGIT MASIH ADA LANGIT JAGAN LUPA DIRI${NC}" 
+
+echo -e "${GREEN}┌──────────────────────────────────────────────────┐${NC}" 
+echo -e "${GREEN}│  \033[0m ${BOLD}${YELLOW}SSH     VMESS       VLESS      TROJAN $NC" 
+echo -e "${GREEN}│  \033[0m ${Blue} $ssh1        $vma           $vla          $tra $NC" 
+echo -e "${GREEN}└──────────────────────────────────────────────────┘${NC}" 
+
 echo -e "${CYAN}╘━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╛\033[0m${NC}"
 echo -e "${CYAN}╒━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╕\033[0m${NC}"
 echo -e " \E[44;1;39m                 • SCRIPT MENU •                \E[0m"
